@@ -118,7 +118,7 @@ __Enables/Disables Panning Menu Within Current Controller__
 ### MenuDelegate
 In order to access the __ESNavigationController__ object from within your menu, it is recommened that your menu classes conform to the protocol __MenuDelegate__. This protocol requires a single property be added, which can then be set to the __ESNavigationController__ object at the time of initialisation.
 
-__Enables Access From Menu To ESNavigationController__
+__Enables Access From Menu To ESNavigationController__  
 ```var easySlideNavigationController: ESNavigationController? { get set }```
 
 ## That's It!
