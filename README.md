@@ -3,9 +3,9 @@
 EasySlide is a simple and powerful slide in menu framework, that enables you to easily add a hamburger style slide in menu to your swift iOS application. It is powerful, configurable and completly contained in just one, 500 line class file.
 
 __(Slide Along, Slide Over, Slide Under)__  
-<img src="https://cloud.githubusercontent.com/assets/4186265/13900313/4e8f1314-ee57-11e5-8ec6-071c3702e732.gif" width="225" height="400">
-<img src="https://cloud.githubusercontent.com/assets/4186265/13900316/723d627a-ee57-11e5-9983-9a10f1d3a907.gif" width="225" height="400">
-<img src="https://cloud.githubusercontent.com/assets/4186265/13900320/8ded1ede-ee57-11e5-98d7-2f7a783015f5.gif" width="225" height="400">
+<img src="https://cloud.githubusercontent.com/assets/4186265/14058234/289a3438-f36e-11e5-8d73-e825ad8413bb.gif" width="225" height="400">
+<img src="https://cloud.githubusercontent.com/assets/4186265/14058236/312e75dc-f36e-11e5-8b58-3c779f35cc49.gif" width="225" height="400">
+<img src="https://cloud.githubusercontent.com/assets/4186265/14058238/37529b3c-f36e-11e5-8e1e-f6e3816a5cff.gif" width="225" height="400">
 
 ## Key Advantages
 * Both __left__ and __right__ menus supported
