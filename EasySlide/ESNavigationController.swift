@@ -53,7 +53,8 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOverlay()
-        let panGestrure = UIPanGestureRecognizer(target: self, action: "panEventFired:")
+        let panSelector = #selector(ESNavigationController.panEventFired as (ESNavigationController) -> (UIPanGestureRecognizer) -> ())
+        let panGestrure = UIPanGestureRecognizer(target: self, action: panSelector)
         panGestrure.delegate = self
         self.view.addGestureRecognizer(panGestrure)
     }
@@ -68,9 +69,11 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
         mainContentOverlay.backgroundColor = UIColor.clearColor()
         
         // add gestures
-        let panGestrure = UIPanGestureRecognizer(target: self, action: "panEventFired:")
+        let panSelector = #selector(ESNavigationController.panEventFired as (ESNavigationController) -> (UIPanGestureRecognizer) -> ())
+        let panGestrure = UIPanGestureRecognizer(target: self, action: panSelector)
         mainContentOverlay.addGestureRecognizer(panGestrure)
-        mainContentOverlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "automatedCloseOpenMenu"))
+        let tapSelector = #selector(ESNavigationController.automatedCloseOpenMenu as (ESNavigationController) -> () -> ())
+        mainContentOverlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: tapSelector))
         
         // add constraints
         mainContentOverlay.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +85,8 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
     // MARK: Setup Methods
     
     func setupMenuViewController(menu: MenuType, viewController: UIViewController){
+        if self.isMenuOpen(menu) { self.closeOpenMenu(animated: false, completion: nil) }
+        self.getMenuView(menu).removeFromSuperview()
         if (menu == .LeftMenu) { self.leftMenuViewController = viewController; self.leftMenuSet = true }
         if (menu == .RightMenu) { self.rightMenuViewController = viewController; self.rightMenuSet = true  }
     }
@@ -96,12 +101,12 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
         if(!ignoreClassMatch || rootType.subjectType != newType.subjectType){
             setViewControllers([viewController], animated: false)
         }
-        if closeOpenMenu { self.closeOpenMenu(animated:true, completion: {})}
+        if closeOpenMenu { self.closeOpenMenu(animated:true, completion: nil)}
     }
     
     // MARK: Open/Close Methods
     
-    func openMenu(menu: MenuType, animated:Bool, completion:(Void)->(Void)){
+    func openMenu(menu: MenuType, animated:Bool, completion:((Void)->(Void))?){
         if menu == .BothMenus { return }
         if self.isMenuEnabled(menu) && self.isMenuSet(menu) {
             self.menuSetup(menu)
@@ -109,13 +114,13 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
         }
     }
     
-    func closeOpenMenu(animated animated:Bool, completion:(Void)->(Void)){
+    func closeOpenMenu(animated animated:Bool, completion:((Void)->(Void))?){
         let openMenu: MenuType = self.isMenuOpen(.LeftMenu) ? .LeftMenu : .RightMenu
-        self.changeMenu(openMenu, animated: true, percentage: 0.0, completion: {})
+        self.changeMenu(openMenu, animated: true, percentage: 0.0, completion: completion)
     }
     
     internal func automatedCloseOpenMenu(){
-        self.closeOpenMenu(animated: true, completion: {})
+        self.closeOpenMenu(animated: true, completion: nil)
     }
 
     func isMenuOpen(menu: MenuType) -> Bool{
@@ -124,12 +129,12 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
     
     // MARK: Private Open/Close Helper Methods
     
-    private func changeMenu(menu: MenuType, animated: Bool, percentage: CGFloat, completion:(Void)->(Void)){
+    private func changeMenu(menu: MenuType, animated: Bool, percentage: CGFloat, completion:((Void)->(Void))?){
         let speed = animated ? self.getMenuAnimationSpeed(menu) : 0
         self.animateLayoutChanges(menu, percentage: percentage, speed: speed, completion: completion)
     }
     
-    private func animateLayoutChanges(menu: MenuType, percentage: CGFloat, speed: CGFloat, completion:(Void)->(Void)){
+    private func animateLayoutChanges(menu: MenuType, percentage: CGFloat, speed: CGFloat, completion:((Void)->(Void))?){
         
         self.view.window?.layoutIfNeeded()
         self.menuLayoutChanges(menu, percentage: percentage)
@@ -143,7 +148,7 @@ class ESNavigationController: UINavigationController, UIGestureRecognizerDelegat
                 self.mainContentOverlay.hidden = (percentage == 0) ? true : false
                 self.inactiveView = (percentage == 1.0) ? self.getOppositeMenu(menu) : .BothMenus
                 if percentage == 0.0 { self.menuCleanUp(menu) }
-                completion()
+                completion?()
         }
     }
     
@@ -368,7 +373,7 @@ extension ESNavigationController {
         percentage = (self.panLimitedAccess && self.panAccessView != viewBeingMoved) ? 0 : percentage // disable pan to new view if in limited pan mode
         
         // animate layout change
-        self.animateLayoutChanges(viewBeingMoved, percentage: percentage, speed: 0.25, completion: {})
+        self.animateLayoutChanges(viewBeingMoved, percentage: percentage, speed: 0.25, completion: nil)
     }
     
     // MARK: UIPanGestureRecognizerDelegate

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RHj-nT-UxG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RHj-nT-UxG">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Slide Navigation Controller-->
@@ -255,7 +255,7 @@
                                                         </constraints>
                                                     </switch>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.19329202586206898" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.1015625" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="u3p-jJ-jhz" firstAttribute="top" secondItem="2g6-dH-eTO" secondAttribute="bottom" constant="8" id="3Wf-vz-pL6"/>
                                                     <constraint firstItem="u3p-jJ-jhz" firstAttribute="leading" secondItem="PXh-DB-sP2" secondAttribute="leading" id="54C-I1-kC8"/>
