@@ -15,7 +15,7 @@ __(Slide Along, Slide Over, Slide Under)__
 * Basic API calls make integration a breeze
 
 ## Public Calls
-```
+``` swift
 // setup
 func setupMenuViewController(menu: MenuType, viewController: UIViewController)
 func setBodyViewController(viewController: UIViewController, closeOpenMenu:Bool, ignoreClassMatch:Bool)
@@ -38,7 +38,7 @@ func limitPanningAccess(shouldLimit:Bool, leftRange: CGFloat, rightRange:CGFloat
 ```
 
 ## Optional Protocol
-```
+``` swift
 protocol EasySlideDelegate{
     func easySlidePanAccessAvailable() -> Bool
 }
@@ -58,7 +58,7 @@ Your Slide in menu is fully integrated and can now be configured to your liking.
 
 To __set the menu view controller__, simply call the method   
   
-```func setupMenuViewController(menu: MenuType, viewController: UIViewController)```  
+```func setupMenuViewController(menu: MenuType, viewController: UIViewController)```
   
 The __menu__ argument, specifies the menu you are setting (.LeftMenu or .RightMenu)  
 The __viewController__ argument, specifies the view controller you are assigning to the menu  
